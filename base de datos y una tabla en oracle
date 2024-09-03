@@ -1,0 +1,50 @@
+import turtle
+import math
+
+# Configuración de la pantalla
+screen = turtle.Screen()
+screen.bgcolor("white")
+
+# Crear una tortuga
+flower = turtle.Turtle()
+flower.speed(0)
+flower.shape("turtle")
+
+# Función para dibujar un pétalo
+def draw_petal(turtle, radius):
+    turtle.circle(radius, 60)  # Dibujar media circunferencia
+    turtle.left(120)
+    turtle.circle(radius, 60)
+    turtle.left(120)
+
+# Dibujar la flor
+def draw_flower():
+    num_petals = 12
+    radius = 100
+    for _ in range(num_petals):
+        draw_petal(flower, radius)
+        flower.left(360 / num_petals)  # Rotar para la siguiente pétalo
+
+# Animar el movimiento de los pétalos
+def animate_flower():
+    angle = 0
+    while True:
+        flower.clear()
+        flower.setheading(angle)
+        draw_flower()
+        angle += 2  # Cambiar este valor para ajustar la velocidad de rotación
+        screen.update()
+
+# Configuración inicial
+flower.penup()
+flower.goto(0, -100)
+flower.pendown()
+
+# Configuración de la pantalla para animación
+screen.tracer(0)  # Desactivar la actualización automática para animación más suave
+
+# Ejecutar la animación
+animate_flower()
+
+# Mantener la ventana abierta
+turtle.done()
