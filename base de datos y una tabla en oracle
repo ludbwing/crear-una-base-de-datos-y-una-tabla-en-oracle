@@ -1,50 +1,48 @@
-import turtle
-import math
+ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
 
-# Configuración de la pantalla
-screen = turtle.Screen()
-screen.bgcolor("white")
+CREATE USER USUARIO_PRUEBA IDENTIFIED BY "123456"
+DEFAULT TABLESPACE "USERS"
+TEMPORARY TABLESPACE "TEMP";
 
-# Crear una tortuga
-flower = turtle.Turtle()
-flower.speed(0)
-flower.shape("turtle")
+ALTER USER USUARIO_PRUEBA QUOTA UNLIMITED ON USERS;
 
-# Función para dibujar un pétalo
-def draw_petal(turtle, radius):
-    turtle.circle(radius, 60)  # Dibujar media circunferencia
-    turtle.left(120)
-    turtle.circle(radius, 60)
-    turtle.left(120)
+GRANT CREATE SESSION TO USUARIO_PRUEBA;
 
-# Dibujar la flor
-def draw_flower():
-    num_petals = 12
-    radius = 100
-    for _ in range(num_petals):
-        draw_petal(flower, radius)
-        flower.left(360 / num_petals)  # Rotar para la siguiente pétalo
+GRANT "RESOURCE" TO USUARIO_PRUEBA;
 
-# Animar el movimiento de los pétalos
-def animate_flower():
-    angle = 0
-    while True:
-        flower.clear()
-        flower.setheading(angle)
-        draw_flower()
-        angle += 2  # Cambiar este valor para ajustar la velocidad de rotación
-        screen.update()
+ALTER USER USUARIO_PRUEBA DEFAULT ROLE "RESOURCE";
 
-# Configuración inicial
-flower.penup()
-flower.goto(0, -100)
-flower.pendown()
 
-# Configuración de la pantalla para animación
-screen.tracer(0)  # Desactivar la actualización automática para animación más suave
+--crear una nueva base de datos---------
+ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
 
-# Ejecutar la animación
-animate_flower()
+CREATE USER USUARIO_MATRICULA IDENTIFIED BY "1234560"
+DEFAULT TABLESPACE "USERS"
+TEMPORARY TABLESPACE "TEMP";
 
-# Mantener la ventana abierta
-turtle.done()
+ALTER USER USUARIO_MATRICULA QUOTA UNLIMITED ON USERS;
+
+GRANT CREATE SESSION TO USUARIO_MATRICULA;
+
+GRANT "RESOURCE" TO USUARIO_MATRICULA;
+
+ALTER USER USUARIO_MATRICULA DEFAULT ROLE "RESOURCE";
+------------------------------------------------------------------
+
+-----LUDWING ALDAIR MAMANI YUCRA----
+
+create table persona(
+  id_persona int primary key,
+  nombre varchar(50) not null,
+  apellido_materno varchar(50) not null,
+  apellido_paterno varchar(50) not null,
+  fecha_nacimiento date,
+  celular varchar(20) not null,
+  correo varchar(50),
+  direccion varchar(250),
+  id_genero int,
+  fecha_actualizacion date,
+  fecha_registro date,
+  id_usuario_actualizacion int,
+  id_usuario_registro int
+);
